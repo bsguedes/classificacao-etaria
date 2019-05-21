@@ -113,3 +113,9 @@ def fill_slide(slide, card):
     add_tokens(slide, card.tokens)
 
 
+def bonus_card(slide, card):
+    add_rectangle(slide, RGBColor(180, 216, 231), 0.4, 0.4, 1.7, 0.6)
+    text_box(slide, card.name, 0.4, 0.4, 1.7, 0.6, font_size=11, alignment=PP_ALIGN.CENTER,
+             vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True)
+    text_box(slide, card.percent_text(), 0.2, 2.9, 2.1, font_size=8, alignment=PP_ALIGN.CENTER, italic=True)
+

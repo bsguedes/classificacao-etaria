@@ -1,2 +1,3 @@
 *.pptx
 .idea/*
+__pycache__/*
