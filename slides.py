@@ -1,4 +1,5 @@
 import math
+import os.path
 from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN
 from pptx.enum.shapes import MSO_SHAPE
@@ -24,8 +25,9 @@ def text_box(slide, text, left, top, width=None, height=0.4,
         tf.vertical_anchor = vertical_alignment
 
 
-def add_rectangle(slide, color, left, top, width, height, border=None):
-    rectangle = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(left), Inches(top), Inches(width), Inches(height))
+def add_rectangle(slide, color, left, top, width, height, border=None, rounded=False):
+    shape = MSO_SHAPE.ROUNDED_RECTANGLE if rounded else MSO_SHAPE.RECTANGLE
+    rectangle = slide.shapes.add_shape(shape, Inches(left), Inches(top), Inches(width), Inches(height))
     fill = rectangle.fill
     fill.solid()
     fill.fore_color.rgb = color
@@ -37,6 +39,12 @@ def add_rectangle(slide, color, left, top, width, height, border=None):
 def add_image(slide, name, left, top, height):
     pic_path = 'img/%s.png' % name
     slide.shapes.add_picture(pic_path, Inches(left), Inches(top), height=Inches(height))
+
+
+def add_photo(slide, name, left, top, height):
+    pic_path = 'modphotos/%s' % name
+    if os.path.isfile(pic_path):
+        slide.shapes.add_picture(pic_path, Inches(left), Inches(top), height=Inches(height))
 
 
 def add_programming(slide, prog):
@@ -97,12 +105,13 @@ def add_tokens(slide, tokens):
 def fill_slide(slide, card):
     text_box(slide, card.name, 0.75, 0.1, 1.6, font_size=12, alignment=PP_ALIGN.CENTER)
     text_box(slide, card.attribute, 0.75, 0.35, 1.6, font_size=9, alignment=PP_ALIGN.CENTER, italic=True)
+    add_photo(slide, card.img_path, 0.6, 0.76, 1.83)
     add_rectangle(slide, card.ability_color(), 0.0, 2.6, 2.5, 0.6)
     text_box(slide, card.ability_text(), 0.0, 2.6, 2.5, font_size=8, height=0.6, alignment=PP_ALIGN.JUSTIFY_LOW,
              vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True)
-    add_rectangle(slide, RGBColor(224, 224, 224), 0.1, 0.0, 0.58, 0.75, border=RGBColor(192, 192, 192))
-    add_image(slide, 'star', 1.9, 0.7, 0.1)
-    text_box(slide, card.year, 2.0, 0.635, font_size=8)
+    # add_rectangle(slide, RGBColor(224, 224, 224), 0.1, 0.0, 0.58, 0.75, border=RGBColor(192, 192, 192))
+    add_image(slide, 'star', 1.9, 0.6, 0.1)
+    text_box(slide, card.year, 2.0, 0.535, font_size=8)
     text_box(slide, card.points, 0.2, 1.0, 0.15, font_size=14, alignment=PP_ALIGN.RIGHT)
     add_image(slide, 'ibope', 0.33, 1.07, 0.17)
     add_image(slide, card.age, 0.21, 1.32, 0.28)
