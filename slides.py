@@ -118,4 +118,18 @@ def bonus_card(slide, card):
     text_box(slide, card.name, 0.4, 0.4, 1.7, 0.6, font_size=11, alignment=PP_ALIGN.CENTER,
              vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True)
     text_box(slide, card.percent_text(), 0.2, 2.9, 2.1, font_size=8, alignment=PP_ALIGN.CENTER, italic=True)
+    text_box(slide, card.text, 0.3, 1.8, 1.9, font_size=9, height=0.6, alignment=PP_ALIGN.CENTER,
+             vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True)
+    if card.type() == 'range':
+        text_box(slide, card.p1, 0.65, 1.25, 0.15, font_size=14, alignment=PP_ALIGN.RIGHT)
+        add_image(slide, 'ibope', 0.78, 1.32, 0.17)
+        text_box(slide, "%s atrações" % card.range1, 0.35, 1.55, 0.9, font_size=8, alignment=PP_ALIGN.CENTER)
+        text_box(slide, card.p2, 1.6, 1.25, 0.15, font_size=14, alignment=PP_ALIGN.RIGHT)
+        add_image(slide, 'ibope', 1.73, 1.32, 0.17)
+        text_box(slide, "%s atrações" % card.range2, 1.3, 1.55, 0.9, font_size=8, alignment=PP_ALIGN.CENTER)
+    else:
+        text_box(slide, card.score, 1.1, 1.25, 0.15, font_size=14, alignment=PP_ALIGN.RIGHT)
+        add_image(slide, 'ibope', 1.23, 1.32, 0.17)
+        text_box(slide, 'por atração', 0.8, 1.55, 0.9, font_size=8, alignment=PP_ALIGN.CENTER)
+
 
