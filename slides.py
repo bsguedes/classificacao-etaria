@@ -25,6 +25,52 @@ def text_box(slide, text, left, top, width=None, height=0.4,
         tf.vertical_anchor = vertical_alignment
 
 
+def add_image(slide, name, left, top, height):
+    pic_path = 'img/%s.png' % name
+    slide.shapes.add_picture(pic_path, Inches(left), Inches(top), height=Inches(height))
+
+
+LINES = {11: 2.85, 21: 2.785, 22: 2.93, 31: 2.72, 32: 2.85, 33: 3.01, 41: 2.64, 42: 2.785, 43: 2.93, 44: 3.06}
+PROPORTION = {'12': 1.25, '14': 1.25, '16': 1.25, '18': 1.25}
+
+
+def add_formatted_text(slide, text, left, top, width=None, height=0.4, background_color=None,
+                       font_size=None, alignment=None, vertical_alignment=None, italic=False,
+                       word_wrap=False, positions=None):
+    width = width if width is not None else 1
+    tx_box = slide.shapes.add_textbox(Inches(left), Inches(top), Inches(width), Inches(height))
+    tf = tx_box.text_frame
+    text_parts = text.split(' ')
+    tf.word_wrap = word_wrap
+    p = tf.paragraphs[0]
+    pos_index = 0
+    for part in text_parts:
+        if "{" in part and positions is not None:
+            point_run = p.add_run()
+            point_run.text = '___'
+            point_run.font.color.rgb = background_color
+            run = p.add_run()
+            run.text = part.split('}')[1] + ' '
+            img = part[part.find("{")+1:part.find("}")]
+            proportion = PROPORTION[img] if img in PROPORTION else 1
+            add_image(slide, img, positions[pos_index][1], LINES[positions[pos_index][0]], 0.1 * proportion)
+            pos_index += 1
+        else:
+            run = p.add_run()
+            run.text = part + ' '
+            if '$' in part:
+                run.font.bold = True
+
+    tf.paragraphs[0].font.italic = italic
+    tf.paragraphs[0].font.name = 'Arial Narrow'
+    if font_size is not None:
+        tf.paragraphs[0].font.size = Pt(font_size)
+    if alignment is not None:
+        tf.paragraphs[0].alignment = alignment
+    if vertical_alignment is not None:
+        tf.vertical_anchor = vertical_alignment
+
+
 def add_rectangle(slide, color, left, top, width, height, border=None, rounded=False):
     shape = MSO_SHAPE.ROUNDED_RECTANGLE if rounded else MSO_SHAPE.RECTANGLE
     rectangle = slide.shapes.add_shape(shape, Inches(left), Inches(top), Inches(width), Inches(height))
@@ -34,11 +80,6 @@ def add_rectangle(slide, color, left, top, width, height, border=None, rounded=F
     line = rectangle.line
     line.color.rgb = border if border is not None else color
     rectangle.shadow.inherit = False
-
-
-def add_image(slide, name, left, top, height):
-    pic_path = 'img/%s.png' % name
-    slide.shapes.add_picture(pic_path, Inches(left), Inches(top), height=Inches(height))
 
 
 def add_photo(slide, name, left, top, height):
@@ -107,9 +148,9 @@ def fill_slide(slide, card):
     text_box(slide, card.attribute, 0.75, 0.35, 1.6, font_size=9, alignment=PP_ALIGN.CENTER, italic=True)
     add_photo(slide, card.img_path, 0.6, 0.76, 1.83)
     add_rectangle(slide, card.ability_color(), 0.0, 2.6, 2.5, 0.6)
-    text_box(slide, card.ability_text(), 0.0, 2.6, 2.5, font_size=8, height=0.6, alignment=PP_ALIGN.JUSTIFY_LOW,
-             vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True)
-    # add_rectangle(slide, RGBColor(224, 224, 224), 0.1, 0.0, 0.58, 0.75, border=RGBColor(192, 192, 192))
+    add_formatted_text(slide, card.ability_text(), 0.0, 2.6, 2.5, font_size=8, height=0.6,
+                       alignment=PP_ALIGN.JUSTIFY_LOW, vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True,
+                       positions=card.positions, background_color=card.ability_color())
     add_image(slide, 'star', 1.9, 0.6, 0.1)
     text_box(slide, card.year, 2.0, 0.535, font_size=8)
     text_box(slide, card.points, 0.2, 1.0, 0.15, font_size=14, alignment=PP_ALIGN.RIGHT)
@@ -120,6 +161,9 @@ def fill_slide(slide, card):
              vertical_alignment=MSO_ANCHOR.MIDDLE, italic=True, word_wrap=True)
     add_programming(slide, card.programming)
     add_tokens(slide, card.tokens)
+    if len(card.gender) > 2:
+        text_box(slide, card.gender, 0.68, 0.535, 0.45, font_size=7, bold=True, italic=True)
+
 
 
 def bonus_card(slide, card):

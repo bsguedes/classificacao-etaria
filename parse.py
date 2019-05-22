@@ -21,7 +21,8 @@ class BonusCard:
 
 
 class Card:
-    def __init__(self, programming, tokens, name, attribute, year, points, age, money, ability, lore, img_path, gender):
+    def __init__(self, programming, tokens, name, attribute, year, points, age, money, ability, lore, img_path, gender,
+                 positions):
         self.programming = programming
         self.tokens = tokens
         self.name = name
@@ -34,6 +35,10 @@ class Card:
         self.lore = lore
         self.img_path = img_path
         self.gender = gender
+        if len(positions) > 0:
+            self.positions = [(int(x.split(';')[0]), float(x.split(';')[1])) for x in positions.split('&')]
+        else:
+            self.positions = None
 
     def ability_text(self):
         if self.ability[0] == 'Nada':
@@ -88,7 +93,9 @@ def parse_csv(file):
             img_path = c['ImgPath']
             gender = c['Gender']
             lore = c['Lore']
+            positions = c['Tokens']
             cards.append(
-                Card(programming, tokens, name, attribute, year, points, age, money, ability, lore, img_path, gender))
+                Card(programming, tokens, name, attribute, year, points, age, money, ability, lore, img_path, gender,
+                     positions))
     return cards
 
