@@ -30,7 +30,7 @@ def add_image(slide, name, left, top, height):
     slide.shapes.add_picture(pic_path, Inches(left), Inches(top), height=Inches(height))
 
 
-LINES = {11: 2.85, 21: 2.785, 22: 2.93, 31: 2.72, 32: 2.85, 33: 3.01, 41: 2.64, 42: 2.785, 43: 2.93, 44: 3.06}
+LINES = {11: 2.85, 21: 2.785, 22: 2.93, 31: 2.72, 32: 2.85, 33: 3.00, 41: 2.64, 42: 2.785, 43: 2.93, 44: 3.06}
 PROPORTION = {'12': 1.25, '14': 1.25, '16': 1.25, '18': 1.25}
 
 
