@@ -30,14 +30,16 @@ def add_image(slide, name, left, top, height):
     slide.shapes.add_picture(pic_path, Inches(left), Inches(top), height=Inches(height))
 
 
-LINES = {11: 2.85, 21: 2.785, 22: 2.93, 31: 2.72, 32: 2.85, 33: 3.00, 41: 2.64, 42: 2.785, 43: 2.93, 44: 3.06}
-PROPORTION = {'12': 1.25, '14': 1.25, '16': 1.25, '18': 1.25}
+LINES = {11: 2.85, 21: 2.785, 22: 2.93, 31: 2.72, 32: 2.85, 33: 2.995, 41: 2.64, 42: 2.785, 43: 2.93, 44: 3.06}
+PROPORTION = {'12': 1.25, '14': 1.25, '16': 1.25, '18': 1.25, 'A1': 1.25, 'A2': 1.25, 'A3': 1.25}
+BONUS = {11: 2.02, 21: 1.96, 22: 2.09}
 
 
 def add_formatted_text(slide, text, left, top, width=None, height=0.4, background_color=None,
                        font_size=None, alignment=None, vertical_alignment=None, italic=False,
-                       word_wrap=False, positions=None):
+                       word_wrap=False, positions=None, lines=None, icon_size=0.1):
     width = width if width is not None else 1
+    lines = LINES if lines is None else lines
     tx_box = slide.shapes.add_textbox(Inches(left), Inches(top), Inches(width), Inches(height))
     tf = tx_box.text_frame
     text_parts = text.split(' ')
@@ -53,7 +55,7 @@ def add_formatted_text(slide, text, left, top, width=None, height=0.4, backgroun
             run.text = part.split('}')[1] + ' '
             img = part[part.find("{")+1:part.find("}")]
             proportion = PROPORTION[img] if img in PROPORTION else 1
-            add_image(slide, img, positions[pos_index][1], LINES[positions[pos_index][0]], 0.1 * proportion)
+            add_image(slide, img, positions[pos_index][1], lines[positions[pos_index][0]], icon_size * proportion)
             pos_index += 1
         else:
             run = p.add_run()
@@ -165,14 +167,14 @@ def fill_slide(slide, card):
         text_box(slide, card.gender, 0.68, 0.535, 0.45, font_size=7, bold=True, italic=True)
 
 
-
 def bonus_card(slide, card):
     add_rectangle(slide, RGBColor(180, 216, 231), 0.4, 0.4, 1.7, 0.6)
     text_box(slide, card.name, 0.4, 0.4, 1.7, 0.6, font_size=11, alignment=PP_ALIGN.CENTER,
              vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True)
     text_box(slide, card.percent_text(), 0.2, 2.9, 2.1, font_size=8, alignment=PP_ALIGN.CENTER, italic=True)
-    text_box(slide, card.text, 0.3, 1.8, 1.9, font_size=9, height=0.6, alignment=PP_ALIGN.CENTER,
-             vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True)
+    add_formatted_text(slide, card.text, 0.3, 1.8, 1.9, font_size=9, height=0.6, lines=BONUS, icon_size=0.14,
+                       alignment=PP_ALIGN.CENTER, vertical_alignment=MSO_ANCHOR.MIDDLE, word_wrap=True,
+                       positions=card.positions, background_color=RGBColor(255, 255, 255))
     if card.type() == 'range':
         text_box(slide, card.p1, 0.65, 1.25, 0.15, font_size=14, alignment=PP_ALIGN.RIGHT)
         add_image(slide, 'ibope', 0.78, 1.32, 0.17)

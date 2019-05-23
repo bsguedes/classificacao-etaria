@@ -1,27 +1,27 @@
-Nome,Habilidade,Range1,ScoreRange1,Range2,ScoreRange2,ScoreRangeCard,PercCE
-Siga Bem Caminhoneiro,Atrações (exceto Polêmico) que valem 3 {I} ou menos,5-6,3,7+,6,,46%
-Medalhão Persa,Atrações com {DN} anterior ou igual a 1957,4-5,3,6+,6,,35%
-"Pequenas Empresas, Grandes Negócios",Atrações com {DN} posterior ou igual a 1975,4-5,3,6+,6,,34%
-Roda Viva,Atrações com atributo Apresentador ou Jornalista,4-5,3,6+,6,,28%
-O Clone,Atrações com atributo Ator,,,,,2,12%
-Show da Fé,Atrações com atributo Esotérico,2-3,5,4+,8,,7%
-Zorra Total,Atrações com atributo Humor,,,,,2,16%
-Bom Dia & Cia,Atrações com atributo Infantil ou Personagem,,,,,3,9%
-Rockgol,Atrações com atributo Músico ou Esportivo,,,,,2,13%
-Sessão da Tarde,Atrações com classificação etária {12},2-3,4,4+,7,,15%
-Cinema em Casa,Atrações com classificação etária {14},3-4,4,5+,7,,19%
-Tela Class,Atrações com classificação etária {16},2-3,5,4+,8,,19%
-Cine Band Privê,Atrações com classificação etária {18},2-3,5,4+,8,,12%
-Encontro,Atrações cuja programação é apenas {A1},3-4,4,5,8,,22%
-Brasileirão,Atrações cuja programação é apenas {A2},2-3,3,4+,8,,17%
-Casa dos Artistas,Atrações cuja programação é apenas {A3},3-4,4,5,8,,21%
-Domingo Legal,Atrações cujo custo contenha {X},,,,,2,17%
-The Voice Brasil,Atrações cujo custo contenha {X1},2-3,3,4+,7,,26%
-Tentação,Atrações cujo custo contenha {X2},2-3,3,4+,8,,26%
-Globo Repórter,Atrações cujo custo contenha {X3},,,,,2,24%
-Hora da Verdade,Atrações cujo custo contenha {X4},5-7,3,8+,7,,32%
-Roda a Roda Jequiti,Atrações cujo custo contenha apenas {X5},,,,,2,15%
-Passa ou Repassa,"Atrações que fazem parte de uma TRUPE, ou são PARCEIROS",,,,,3,8%
-Teleton,Atrações que tenham ao menos 1 $ nelas,7-8,3,9+,6,,
-Troféu Imprensa,Atrações que tenham ao menos 4 $ nelas,,,,,1,34%
-Show do Milhão (dos famosos),Cartas de atrações na mão ao final do jogo,5-7,4,8,7,,
+Nome,Habilidade,Tokens,Range1,ScoreRange1,Range2,ScoreRange2,ScoreRangeCard,PercCE
+Siga Bem Caminhoneiro,Atrações (exceto Polêmico) que valem 3 {I} ou menos,22;1.15,5-6,3,7+,6,,46%
+Medalhão Persa,Atrações com {DN} anterior ou igual a 1957,21;1.09,4-5,3,6+,6,,35%
+"Pequenas Empresas, Grandes Negócios",Atrações com {DN} posterior ou igual a 1975,21;1.08,4-5,3,6+,6,,34%
+Roda Viva,Atrações com atributo Apresentador ou Jornalista,,4-5,3,6+,6,,28%
+O Clone,Atrações com atributo Ator,,,,,,2,12%
+Show da Fé,Atrações com atributo Esotérico,,2-3,5,4+,8,,7%
+Zorra Total,Atrações com atributo Humor,,,,,,2,16%
+Bom Dia & Cia,Atrações com atributo Infantil ou Personagem,,,,,,3,9%
+Rockgol,Atrações com atributo Músico ou Esportivo,,,,,,2,13%
+Sessão da Tarde,Atrações com classificação etária {12},22;1.185,2-3,4,4+,7,,15%
+Cinema em Casa,Atrações com classificação etária {14},22;1.185,3-4,4,5+,7,,19%
+Tela Class,Atrações com classificação etária {16},22;1.185,2-3,5,4+,8,,19%
+Cine Band Privê,Atrações com classificação etária {18},22;1.185,2-3,5,4+,8,,12%
+Encontro,Atrações cuja programação é apenas {A1},22;1.33,3-4,4,5,8,,22%
+Brasileirão,Atrações cuja programação é apenas {A2},22;1.33,2-3,3,4+,8,,17%
+Casa dos Artistas,Atrações cuja programação é apenas {A3},22;1.33,3-4,4,5,8,,21%
+Domingo Legal,Atrações cujo custo contenha {X},11;1.86,,,,,2,17%
+The Voice Brasil,Atrações cujo custo contenha {X1},11;1.86,2-3,3,4+,7,,26%
+Tentação,Atrações cujo custo contenha {X2},11;1.86,2-3,3,4+,8,,26%
+Globo Repórter,Atrações cujo custo contenha {X3},11;1.86,,,,,2,24%
+Hora da Verdade,Atrações cujo custo contenha {X4},11;1.86,5-7,3,8+,7,,32%
+Roda a Roda Jequiti,Atrações cujo custo contenha apenas {X5},22;1.33,,,,,2,15%
+Passa ou Repassa,"Atrações que fazem parte de uma TRUPE, ou são PARCEIROS",,,,,,3,8%
+Teleton,Atrações que tenham ao menos 1 $ nelas,,7-8,3,9+,6,,
+Troféu Imprensa,Atrações que tenham ao menos 4 $ nelas,,,,,,1,34%
+Show do Milhão (dos famosos),Cartas de atrações na mão ao final do jogo,,5-7,4,8,7,,

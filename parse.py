@@ -3,7 +3,7 @@ from pptx.dml.color import RGBColor
 
 
 class BonusCard:
-    def __init__(self, name, text, range1, p1, range2, p2, score, perc):
+    def __init__(self, name, text, range1, p1, range2, p2, score, perc, positions):
         self.name = name
         self.text = text
         self.range1 = range1 if len(range1) > 0 else None
@@ -12,6 +12,10 @@ class BonusCard:
         self.p2 = p2 if len(p2) > 0 else None
         self.score = score if len(score) > 0 else None
         self.perc = perc if len(perc) > 0 else None
+        if len(positions) > 0:
+            self.positions = [(int(x.split(';')[0]), float(x.split(';')[1])) for x in positions.split('&')]
+        else:
+            self.positions = None
 
     def type(self):
         return 'mult' if self.score is not None else 'range'
@@ -71,7 +75,7 @@ def bonus_csv(file):
         for c in data:
             cards.append(
                 BonusCard(c['Nome'], c['Habilidade'], c['Range1'], c['ScoreRange1'], c['Range2'], c['ScoreRange2'],
-                          c['ScoreRangeCard'], c['PercCE']))
+                          c['ScoreRangeCard'], c['PercCE'], c['Tokens']))
     return cards
 
 
